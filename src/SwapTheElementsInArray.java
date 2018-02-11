@@ -2,9 +2,11 @@ import java.util.Arrays;
 
 public class SwapTheElementsInArray {
     private static int[] dataElements = {3, 4, 6, 17, 9, 11, 13, 2, 1, 5};
+    private static int[] arrForSorting = {5, 17, 9, 11, 13, 2};
 
     public static void main(String[] args) {
-        System.out.println( Arrays.toString(dataElements) + ": initial version ");
+        //System.out.println( Arrays.toString(dataElements) + ": initial version ");
+        System.out.println( Arrays.toString(arrForSorting) + ": initial version ");
         //fun(dataElements);
         //fun_1(dataElements);
         //fun_2(dataElements);
@@ -20,7 +22,11 @@ public class SwapTheElementsInArray {
         //swap(dataElements, 1, 4);
         //fun_12(dataElements);
         //fun_13(dataElements, 10);
-        fun_14(dataElements, 10);
+        //fun_14(dataElements, 10);
+        //fun_15(arrForSorting);
+        fun_16(arrForSorting);
+        //fun_17(arrForSorting);
+        //fun_18(arrForSorting);
 
 
     }
@@ -180,5 +186,84 @@ public class SwapTheElementsInArray {
         }
         System.out.println(Arrays.toString(array));
         return -(low + 1);
+    }
+
+    /*алгоритм сортировки "пузырьком", при котором на каждом проходе "всплывает" самый большой элемент*/
+    static void fun_15(int[] arr) {
+        for (int barrier = arr.length - 1; barrier >= 0; barrier--) {
+
+            for (int index = 0; index < barrier; index++) {
+                            System.out.println("barrier --> " + barrier + ", index --> " + index);
+                if (arr[index] > arr[index + 1]) {
+                    int tmp = arr[index];
+                            System.out.println("tmp --> " + tmp);
+                    arr[index] = arr[index + 1];
+                            System.out.println("arr[index] --> " + arr[index]);
+                    arr[index + 1] = tmp;
+                            System.out.println("arr[index + 1] --> " + arr[index]);
+                }
+                System.out.println();
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+    /*алгоритм сортировки "пузырьком", при котором "тонет" самый маленький элемент*/
+    static void fun_16(int[] arr) {
+        for (int barrier = 1; barrier < arr.length; barrier++) {
+                    System.out.println("barrier --> " + barrier);
+
+            int newElement = arr[barrier];
+                    System.out.println("newElement --> " + newElement);
+
+            int location = barrier - 1;
+                    System.out.println("location --> " + location);
+
+            while (location >= 0 && arr[location] > newElement) {
+                arr[location + 1] = arr[location];
+                location--;
+            }
+            arr[location + 1] = newElement;
+                    System.out.println("arr[location+1] --> " + arr[location+1]);
+                    System.out.println();
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+    /*алгоритм сортировки вставками. Каждый елемент вставляем на свое место*/
+    static void fun_17(int[] arr) {
+        for (int barrier = 1; barrier < arr.length; barrier++) {
+                    System.out.println("barrier --> " + barrier);
+
+            int newElement = arr[barrier];
+                    System.out.println("newElement --> " + newElement);
+
+            int location = barrier - 1;
+                    System.out.println("location --> " + location);
+
+
+            while (location >= 0 && arr[location] > newElement) {
+                arr[location + 1] = arr[location];
+                location--;
+            }
+            arr[location + 1] = newElement;
+                    System.out.println("arr[location + 1] --> " + arr[location + 1]);
+                    System.out.println();
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+    /*алгоритм сортировки выборками. Ищем наименьший элемент и ставим его в первую ячейку*/
+    static void fun_18(int[] array) {
+        for (int barrier = 0; barrier < array.length - 1; barrier++) {
+            for (int index = barrier + 1; index < array.length; index++) {
+                if (array[barrier] > array[index]) {
+                    int tmp = array[index];
+                    array[index] = array[barrier];
+                    array[barrier] = tmp;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(array));
     }
 }
